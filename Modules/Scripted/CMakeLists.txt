@@ -4,6 +4,7 @@ set(modules
   ImportItkSnapLabel
   PerformanceTests
   SampleData
+  CurveCurvatureViz
   ScreenCapture
   SegmentEditor
   SegmentStatistics
