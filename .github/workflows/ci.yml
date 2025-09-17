@@ -46,7 +46,7 @@ jobs:
         with:
           files: |
             SuperBuild/External_*
-          base_sha: nightly-main
+          base_sha: origin/main
 
       # List any SuperBuild files that were changed
       - name: "List Changed SuperBuild Files"
@@ -72,7 +72,7 @@ jobs:
       # Build Slicer if relevant paths were changed and no SuperBuild changes were detected
       - name: "Build Slicer"
         id: slicer-build
-        if: ${{ steps.changes.outputs.paths-to-include == 'true' && steps.superbuild-changes.outputs.any_changed == 'false' }}
+        if: "${{ github.event_name == 'workflow_dispatch' || (steps.changes.outputs.paths-to-include == 'true' && steps.superbuild-changes.outputs.any_changed == 'false') }}"
         uses: ./.github/actions/slicer-build
 
       # Upload the Slicer package artifact if the build was successful
